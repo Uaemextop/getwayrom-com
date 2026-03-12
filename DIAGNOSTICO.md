@@ -310,10 +310,11 @@ su
 for tz in /sys/class/thermal/thermal_zone*/; do
     type=$(cat "$tz/type" 2>/dev/null)
     temp=$(cat "$tz/temp" 2>/dev/null)
-    echo "$type: ${temp}°mC"
+    temp_c=$((temp / 1000))
+    echo "$type: ${temp_c}°C (raw: ${temp})"
 done
 
-# Si la temperatura es alta (>45000 mC / 45°C), el thermal throttling
+# Si la temperatura es alta (>45°C), el thermal throttling
 # puede estar causando los congelamientos
 ```
 
